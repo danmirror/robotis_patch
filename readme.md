@@ -108,6 +108,8 @@ patch manual
 		cd ../
 		catkin_make 
 		
+continue again
+
 		cd ~/catkin_ws/src/
 		$ sudo apt-get install ros-melodic-nav-msgs
 		$ sudo apt-get install ros-melodic-octomap
