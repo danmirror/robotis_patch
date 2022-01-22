@@ -187,9 +187,11 @@ root runtime permission
 
 
 #### *ETC Setting
- 
+ 		
+		$ sudo gedit ~/.bashrc
 		$ cd ~/catkin_ws/src/ROBOTIS-OP3-Tools/op3_web_setting_tool
 		$ sudo cp -r ./html /var/www
+		$ source ~/.bashrc
 
 
 #### Author
