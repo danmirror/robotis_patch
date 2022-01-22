@@ -1,12 +1,12 @@
 
-### --- driver brightness
+## --- Driver brightness
 
 		sudo add-apt-repository ppa:apandada1/brightness-controller
 		sudo apt-get update
 		sudo apt-get install brightness-controller-simple
 		sudo apt-get install brightness-controller
 
-### --- additional OS
+## --- Additional OS
 
 		sudo usermod -a -G dialout $USER
 		sudo reboot
@@ -16,7 +16,7 @@
 		sudo apt install g++ git
 		sudo apt install curl
 
-### --- dynamixelsdk
+## --- Dynamixelsdk
 > https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_sdk/library_setup/cpp_linux/
 
 		$ sudo apt-get install gcc-5
@@ -32,12 +32,12 @@ example
 
 		DynamixelSDK/c++/example/protocol1.0/read_write/linux64$ make && ./read_write
 
-### --- OP3_patch
+## --- OP3_patch
 > https://emanual.robotis.com/docs/en/platform/op3/recovery/#recovery-of-robotis-op3
 	
 		$ sudo apt-get update
 		$ sudo apt install samba samba-common python-glade2 system-config-samba
-#####  Samba
+###  *Samba
 
 	Installation
 
@@ -63,16 +63,16 @@ example
 		        Select Only allow access to specific users
 		        Select samba user
 
-##### ros
+### *ROS
 > http://wiki.ros.org/melodic/Installation/Ubuntu
 
 
-##### Installing additional applications 
+### *Installing additional applications 
 	
 		$ sudo apt install v4l-utils
 		$ sudo apt install madplay mpg321
 
-##### Installing ROS packages 
+### *Installing ROS packages 
 		
 		$ cd ~/catkin_ws/src
 		$ git clone https://github.com/ROBOTIS-GIT/face_detection.git
@@ -147,9 +147,50 @@ Download sources from Github.
 		$ git clone https://github.com/ROBOTIS-GIT/ROBOTIS-Utility.git
 		$ cd ~/catkin_ws
 		$ catkin_make
-ETC Setting
+
+### *Simulation
+
+Gazebo
+
+		$ sudo apt-get install ros-melodic-ros-control ros-melodic-ros-controllers
+		$ sudo apt install ros-melodic-joint-state-publisher-gui
+
+fix warning simulation Rviz
+
+just change ~/catkin_ws/src/ROBOTIS-OP3-Demo/op3_bringup/launch/op3_bringup_visualozation.launch
+
+		<?xml version="1.0" ?>
+		<launch>
+		  <param name="robot_description" command="$(find xacro)/xacro.py '$(find op3_description)/urdf/robotis_op3.urdf.xacro'"/>
+
+		  <!-- Send fake joint values and monitoring present joint angle -->
+		  <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher">
+		    <param name="use_gui" value="TRUE"/>
+		    <rosparam param="/source_list">[/robotis/present_joint_states]</rosparam>
+		  </node>
+
+		  <!-- Combine joint values -->
+
+		  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+		    <remap from="/joint_states" to="/robotis/present_joint_states" />
+		  </node>
+
+		  <!-- Show in Rviz   -->
+		  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find op3_bringup)/rviz/op3_bringup.rviz"/>
+		</launch>
+
+
+root runtime permission
+
+		export XDG_RUNTIME_DIR=/tmp/runtime-root 
+		export RUNLEVEL=3
+
+
+#### *ETC Setting
  
 		$ cd ~/catkin_ws/src/ROBOTIS-OP3-Tools/op3_web_setting_tool
 		$ sudo cp -r ./html /var/www
+
+
 
 
