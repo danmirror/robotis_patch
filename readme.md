@@ -181,18 +181,20 @@ just change ~/catkin_ws/src/ROBOTIS-OP3-Demo/op3_bringup/launch/op3_bringup_visu
 
 
 root runtime permission
-
-		export XDG_RUNTIME_DIR=/tmp/runtime-root 
-		export RUNLEVEL=3
+		
+		$ sudo gedit ~/.bashrc
+		
+			export XDG_RUNTIME_DIR=/tmp/runtime-root 
+			export RUNLEVEL=3
+			
+		$ source ~/.bashrc
 
 
 #### *ETC Setting
  		
-		$ sudo gedit ~/.bashrc
+		
 		$ cd ~/catkin_ws/src/ROBOTIS-OP3-Tools/op3_web_setting_tool
 		$ sudo cp -r ./html /var/www
-		$ source ~/.bashrc
-
 
 #### Author
 > Danu andrean
